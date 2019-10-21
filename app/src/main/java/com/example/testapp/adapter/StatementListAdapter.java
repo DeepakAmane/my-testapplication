@@ -16,6 +16,9 @@ import com.example.testapp.viewmodel.StatementsListViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * adapter to bind the Statement list for the Statements ListActivity
+ */
 public class StatementListAdapter extends RecyclerView.Adapter<StatementListAdapter.StatementHolder> {
 
 
