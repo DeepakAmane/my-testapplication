@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testapp.R;
 import com.example.testapp.network.response.Statement;
-import com.example.testapp.network.response.StatementResponse;
-import com.example.testapp.viewmodel.StatementsListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

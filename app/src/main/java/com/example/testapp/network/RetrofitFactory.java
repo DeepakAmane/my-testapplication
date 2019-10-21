@@ -3,6 +3,9 @@ package com.example.testapp.network;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Network calling Library
+ **/
 public class RetrofitFactory {
 
     private static Retrofit retrofit = null;
