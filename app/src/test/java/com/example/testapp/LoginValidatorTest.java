@@ -61,15 +61,11 @@ public class LoginValidatorTest {
         assertTrue(Utils.isValidPassword("JOHN@1"));
         assertTrue(Utils.isValidPassword("johN1@"));
         assertTrue(Utils.isValidPassword("J@1a"));
-
         assertFalse(Utils.isValidPassword("john"));
         assertFalse(Utils.isValidPassword("john@"));
         assertFalse(Utils.isValidPassword("john@1"));
         assertFalse(Utils.isValidPassword("john1@"));
         assertFalse(Utils.isValidPassword("joh1@"));
         assertFalse(Utils.isValidPassword("johN@"));
-
     }
-
-
 }
