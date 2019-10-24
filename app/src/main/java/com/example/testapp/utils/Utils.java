@@ -28,7 +28,7 @@ public class Utils {
     public static boolean isValidPassword(final String password) {
         Pattern pattern;
         Matcher matcher;
-        final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+]).{4,100})";
+        final String PASSWORD_PATTERN = "^((?=.*\\d)(?=.*[A-Z])(?=.*[!@#$%^&*()+]).{4,100})$";
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(password);
         return matcher.matches();
@@ -80,7 +80,4 @@ public class Utils {
 
         return false;
     }
-
-
-
 }
