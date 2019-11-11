@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.testapp.model.StatementsRepository;
+import com.example.testapp.model.UserRepository;
 import com.example.testapp.network.response.StatementResponse;
 import com.example.testapp.network.response.UserAccount;
 
@@ -17,12 +17,12 @@ public class StatementsListViewModel extends AndroidViewModel {
 
     // Create a LiveData
     private LiveData<StatementResponse> statementListResponse;
-    private StatementsRepository statementsRepository;
+    private UserRepository mUserRepository;
 
-    public StatementsListViewModel(Application application) {
+    public StatementsListViewModel(Application application, UserRepository userRepository) {
         super(application);
-        statementsRepository = new StatementsRepository();
-        statementListResponse = statementsRepository.getStatementList();
+        this.mUserRepository = userRepository;
+        statementListResponse = userRepository.getStatementList();
     }
 
     public LiveData<StatementResponse> getStatementList() {
@@ -31,7 +31,7 @@ public class StatementsListViewModel extends AndroidViewModel {
 
     public void onLaunchPullStatementList(UserAccount userAccount) {
         if (userAccount != null) {
-            statementsRepository.fetchStatementList(userAccount);
+            mUserRepository.fetchStatementList(userAccount);
         }
     }
 }

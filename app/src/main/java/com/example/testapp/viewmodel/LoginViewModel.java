@@ -2,14 +2,14 @@ package com.example.testapp.viewmodel;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.testapp.model.UserDetailsRepository;
+import com.example.testapp.model.UserRepository;
 import com.example.testapp.network.response.LoginResponse;
 import com.example.testapp.utils.Utils;
 
@@ -26,17 +26,19 @@ public class LoginViewModel extends AndroidViewModel {
 
     public MutableLiveData<Integer> visibility;
     private MutableLiveData<String> toastMessage;
-    private UserDetailsRepository userDetailsRepository;
     private Context context;
 
+    private UserRepository mUserRepository;
 
-    public LoginViewModel(Application application) {
+
+    public LoginViewModel(Application application, UserRepository userRepository) {
         super(application);
-        this.context = application.getApplicationContext();
-        userDetailsRepository = new UserDetailsRepository();
+        Log.e(LoginViewModel.class.getName(), "Const");
         toastMessage = new MutableLiveData<>();
         toastMessage.setValue("");
-        userLoginResponse = userDetailsRepository.getLoginUser();
+        this.context = application.getApplicationContext();
+        this.mUserRepository = userRepository;
+        this.userLoginResponse = mUserRepository.getLoginUser();
     }
 
     public MutableLiveData<Integer> getVisibility() {
@@ -46,7 +48,6 @@ public class LoginViewModel extends AndroidViewModel {
         }
         return visibility;
     }
-
 
 
     public LiveData<LoginResponse> getLoginUser() {
@@ -64,7 +65,7 @@ public class LoginViewModel extends AndroidViewModel {
         if (validateInputs()) {
             if (Utils.isNetworkConnected(context)) {
                 getVisibility().setValue(0); // show Progress Dialog
-                userDetailsRepository.loginUser(email.get(), password.get());
+                mUserRepository.loginUser(email.get(), password.get());
             } else {
                 toastMessage.setValue("No Network Connection");
             }
