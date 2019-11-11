@@ -9,7 +9,13 @@ public class UserAccount implements Serializable {
     private String bankAccount;
     private String agency;
     private Double balance;
-
+    public UserAccount(int userId, String name, String bankAccount, String agency, Double balance) {
+        this.userId = userId;
+        this.name = name;
+        this.bankAccount = bankAccount;
+        this.agency = agency;
+        this.balance = balance;
+    }
 
     public int getUserId() {
         return userId;
