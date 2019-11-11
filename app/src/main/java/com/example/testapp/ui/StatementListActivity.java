@@ -3,6 +3,7 @@ package com.example.testapp.ui;
 import android.os.Bundle;
 
 import com.example.testapp.adapter.StatementListAdapter;
+import com.example.testapp.model.UserViewModelFactory;
 import com.example.testapp.network.response.StatementResponse;
 import com.example.testapp.network.response.UserAccount;
 import com.example.testapp.utils.Utils;
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -41,7 +43,11 @@ public class StatementListActivity extends AppCompatActivity {
         iniUIControls();
         initRecyclerView();
         bindValuesTOUI();
-        mViewModel = ViewModelProviders.of(this).get(StatementsListViewModel.class);
+        // mViewModel = ViewModelProviders.of(this).get(StatementsListViewModel.class);
+        UserViewModelFactory factory = UserViewModelFactory.getInstance(this.getApplication());
+        mViewModel = ViewModelProviders.of(this, factory).get(StatementsListViewModel.class);
+
+
         handleNetworkConnection();
         pullStatementListOnLoad();
     }
@@ -106,7 +112,7 @@ public class StatementListActivity extends AppCompatActivity {
                 if (statementResponse.getStatementList().size() == 0) {
                     Toast.makeText(StatementListActivity.this, "Unbale to get Statement List", Toast.LENGTH_LONG).show();
                 } else {
-
+                    Log.e(StatementListActivity.class.getName(), "Size of the Statement list" + statementResponse.getStatementList().size());
                     adapter.setStatementList(statementResponse.getStatementList());
                 }
             }
