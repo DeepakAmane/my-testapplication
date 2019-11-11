@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.testapp.R;
 import com.example.testapp.databinding.ActivityLoginBinding;
+import com.example.testapp.model.UserViewModelFactory;
 import com.example.testapp.viewmodel.LoginViewModel;
 
 /*****
@@ -33,13 +34,24 @@ public class LoginActivity extends AppCompatActivity {
         activityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
         // Get the ViewModel.
-        mViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        //mViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        UserViewModelFactory factory = UserViewModelFactory.getInstance(this.getApplication());
+        mViewModel = ViewModelProviders.of(this, factory).get(LoginViewModel.class);
+
+
         activityLoginBinding.setViewModel(mViewModel);
         activityLoginBinding.setLifecycleOwner(this);
 
         obeserveLoginAuthentication();
         handleLoginSubmit();
         observeToastMessages();
+    }
+
+    public LoginViewModel getmViewModel() {
+        if (mViewModel != null) {
+            return mViewModel;
+        } else
+            return null;
     }
 
     /**
