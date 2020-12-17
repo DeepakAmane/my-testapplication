@@ -16,7 +16,7 @@ import com.example.testapp.model.UserViewModelFactory;
 import com.example.testapp.viewmodel.LoginViewModel;
 
 /*****
- * Performs Authentication of the User
+ * Performs Authentication of the User : Deepak
  */
 
 public class LoginActivity extends AppCompatActivity {
